@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9월 단체연차 시행 안내</title>
+<script>document.documentElement.className += ' js';</script>
+<style>
+  :root{
+    --bg:#100E0C;
+    --bg2:#1A1512;
+    --card:rgba(255,255,255,.038);
+    --card2:rgba(255,255,255,.055);
+    --line:rgba(255,255,255,.09);
+    --cream:#F3EBE0;
+    --muted:#9C8F81;
+    --gold:#E3BC80;
+    --gold2:#C79A5B;
+    --vermil:#FF5A45;
+    --ink:#E8452F;
+    --ink-d:#BE2A20;
+    --sun:#D9705F;
+    --sat:#7FA9E8;
+    --dim:rgba(255,255,255,.17);
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{margin:0;padding:0;}
+
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',system-ui,-apple-system,sans-serif;
+    line-height:1.7;
+    word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── 히어로 ─────────────────────────────── */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:84px 20px 104px;
+    text-align:center;
+    background:
+      radial-gradient(900px 420px at 78% 8%, rgba(255,214,150,.16), transparent 62%),
+      radial-gradient(700px 500px at 12% 100%, rgba(226,69,46,.10), transparent 64%),
+      linear-gradient(170deg,#1C1713 0%,#100E0C 78%);
+    border-bottom:1px solid var(--line);
+  }
+  .stars{
+    position:absolute; inset:0; pointer-events:none; opacity:.55;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 22%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 28% 62%, #ffeccd, transparent),
+      radial-gradient(1.6px 1.6px at 44% 14%, #fff, transparent),
+      radial-gradient(1.1px 1.1px at 63% 40%, #ffeccd, transparent),
+      radial-gradient(1.3px 1.3px at 86% 58%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 92% 26%, #ffeccd, transparent),
+      radial-gradient(1.1px 1.1px at 8% 76%, #fff, transparent),
+      radial-gradient(1.4px 1.4px at 72% 82%, #ffeccd, transparent);
+    animation:twinkle 5.5s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.35}50%{opacity:.7}}
+
+  .moon{
+    position:absolute; right:9%; top:16%;
+    width:124px; height:124px; border-radius:50%;
+    background:radial-gradient(circle at 34% 30%, #FFFAEE 0%, #F6E3B8 52%, #E0C386 100%);
+    box-shadow:0 0 62px rgba(255,236,190,.42), 0 0 160px rgba(255,214,150,.20);
+    animation:moonRise 1.4s cubic-bezier(.16,.8,.3,1) both;
+  }
+  @keyframes moonRise{
+    from{opacity:0; transform:translateY(34px) scale(.86);}
+    to{opacity:1; transform:none;}
+  }
+
+  .eyebrow{
+    position:relative;
+    display:inline-block;
+    padding:6px 16px;
+    margin-bottom:22px;
+    border:1px solid rgba(227,188,128,.38);
+    border-radius:999px;
+    color:var(--gold);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.22em;
+  }
+  .hero h1{
+    position:relative;
+    margin:0;
+    font-size:clamp(30px,6.6vw,52px);
+    font-weight:800;
+    letter-spacing:-.035em;
+    line-height:1.18;
+    background:linear-gradient(180deg,#FFFCF6 0%,#E9D3AC 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p{
+    position:relative;
+    margin:16px auto 0;
+    max-width:520px;
+    color:var(--muted);
+    font-size:clamp(14px,3.4vw,16.5px);
+  }
+  .hero p b{color:var(--gold); font-weight:700;}
+
+  /* ── 레이아웃 ───────────────────────────── */
+  .wrap{
+    max-width:760px;
+    margin:-56px auto 0;
+    padding:0 20px 72px;
+  }
+  .card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:30px 26px;
+    margin-bottom:16px;
+    backdrop-filter:blur(14px);
+  }
+
+  .reveal{animation:fadeUp .8s cubic-bezier(.16,.8,.3,1) both;}
+  .d1{animation-delay:.10s} .d2{animation-delay:.20s}
+  .d3{animation-delay:.30s} .d4{animation-delay:.40s} .d5{animation-delay:.50s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+  .lede{font-size:clamp(15px,3.6vw,17px); line-height:1.85; margin:0; color:#E7DED2;}
+  .lede b{color:var(--gold); font-weight:700;}
+
+  /* ── 시행일 ─────────────────────────────── */
+  .dateline{
+    display:flex; align-items:center; gap:26px; flex-wrap:wrap;
+    background:linear-gradient(135deg,rgba(227,188,128,.13),rgba(227,188,128,.04));
+    border-color:rgba(227,188,128,.28);
+  }
+  .dl-label{
+    flex:0 0 auto;
+    padding-right:26px;
+    border-right:1px solid rgba(227,188,128,.24);
+    color:var(--muted);
+    font-size:13px; font-weight:600; letter-spacing:.01em;
+  }
+  .dl-body{flex:1 1 200px;}
+  .dl-main{
+    font-size:clamp(26px,6vw,36px); font-weight:800; letter-spacing:-.03em; line-height:1.25;
+    background:linear-gradient(180deg,#FFF3DC 0%,#DEB77E 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .dl-main em{font-style:normal; font-size:.62em; font-weight:700; margin-left:6px;}
+  .dl-sub{margin-top:4px; color:var(--muted); font-size:13.5px;}
+
+  /* ── 달력 ───────────────────────────────── */
+  .cal-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    margin-bottom:20px;
+  }
+  .cal-title{font-size:15px; font-weight:700; color:var(--gold); letter-spacing:-.01em;}
+  .replay{
+    flex:0 0 auto;
+    background:transparent;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:5px 13px;
+    color:var(--muted);
+    font-family:inherit; font-size:11.5px; font-weight:600;
+    cursor:pointer;
+    transition:border-color .2s, color .2s;
+  }
+  .replay:hover{border-color:rgba(227,188,128,.5); color:var(--gold);}
+  html:not(.js) .replay{display:none;}
+
+  .grid{display:grid; grid-template-columns:repeat(7,1fr); gap:7px;}
+  .dow{
+    text-align:center; font-size:11.5px; font-weight:700;
+    color:var(--muted); letter-spacing:.06em; padding-bottom:6px;
+  }
+  .dow.s{color:var(--sun)} .dow.t{color:var(--sat)}
+
+  .d{
+    position:relative;
+    border:1px solid transparent;
+    border-radius:14px;
+    padding:13px 2px 12px;
+    text-align:center;
+    font-size:clamp(15px,3.9vw,18px);
+    font-weight:700;
+    letter-spacing:-.02em;
+  }
+  .d.off{color:var(--sun)}
+  .d.next{color:var(--dim); font-weight:600;}
+  .d.hol{
+    color:#FFDCA8;
+    background:linear-gradient(160deg,rgba(227,188,128,.16),rgba(227,188,128,.06));
+    border-color:rgba(227,188,128,.24);
+  }
+
+  .band{
+    grid-column:5 / 8;
+    margin-top:-2px;
+    border-radius:999px;
+    padding:6px 0;
+    text-align:center;
+    font-size:11.5px; font-weight:800; letter-spacing:.02em;
+    color:#2A1D0C;
+    background:linear-gradient(100deg,var(--gold) 0%,#F0D3A0 50%,var(--gold2) 100%);
+    box-shadow:0 6px 20px rgba(227,188,128,.20);
+  }
+
+  /* ── 28일 · 도장 ─────────────────────────── */
+  .d.today{
+    padding-bottom:16px;
+    background:rgba(255,255,255,.03);
+    border-color:var(--line);
+  }
+  .today .num{display:block; line-height:1.1; transition:none;}
+
+  .stampwrap{
+    position:relative;
+    display:block;
+    width:62px; height:62px;
+    margin:6px auto 0;
+  }
+  .stamp{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(145deg,#F04A33 0%,#C42C21 100%);
+    box-shadow:inset 0 0 0 2.5px rgba(255,255,255,.26), 0 10px 26px rgba(226,69,46,.42);
+    color:#FFF0E9;
+    font-size:14px; font-weight:800; line-height:1.24; letter-spacing:.04em;
+    transform:rotate(-11deg);
+  }
+  .ring{
+    position:absolute; inset:0;
+    border:2px solid var(--vermil);
+    border-radius:50%;
+    opacity:0;
+    pointer-events:none;
+  }
+  .sparks{position:absolute; left:50%; top:50%; width:0; height:0;}
+  .sparks i{
+    position:absolute;
+    width:5px; height:5px; margin:-2.5px;
+    border-radius:50%;
+    background:var(--vermil);
+    opacity:0;
+  }
+  .sparks i:nth-child(even){background:var(--gold); width:4px; height:4px; margin:-2px;}
+
+  /* 애니메이션 — .play 가 붙을 때만 재생 */
+  html.js .stamp,
+  html.js .today .num{opacity:0;}
+
+  .play .stamp{animation:drop .92s cubic-bezier(.52,0,.3,1) .28s both;}
+  @keyframes drop{
+    0%  {opacity:0; transform:translateY(-270px) scale(4.4) rotate(-62deg); filter:blur(3px);}
+    50% {opacity:1; filter:blur(0);}
+    78% {transform:translateY(0) scale(.9) rotate(-8deg);}
+    88% {transform:translateY(-9px) scale(1.06) rotate(-13deg);}
+    100%{opacity:1; transform:translateY(0) scale(1) rotate(-11deg);}
+  }
+
+  /* 임팩트 = .28s + .92s*.78 ≈ 1.0s */
+  .play .today .num{animation:toRed .55s ease-out 1.0s both;}
+  @keyframes toRed{
+    0%  {opacity:1; color:var(--cream); text-shadow:none;}
+    18% {opacity:1; color:var(--vermil);}
+    100%{opacity:1; color:var(--vermil); text-shadow:0 0 22px rgba(255,90,69,.45);}
+  }
+
+  .play .today{animation:cellHit .7s cubic-bezier(.2,.8,.3,1) 1.0s both;}
+  @keyframes cellHit{
+    0%  {transform:scale(1);   background:rgba(255,255,255,.03); border-color:var(--line); box-shadow:none;}
+    16% {transform:scale(.955);}
+    42% {transform:scale(1.025);}
+    100%{transform:scale(1);
+         background:linear-gradient(160deg,rgba(226,69,46,.17),rgba(226,69,46,.05));
+         border-color:rgba(255,90,69,.5);
+         box-shadow:0 0 38px rgba(226,69,46,.22);}
+  }
+
+  .play .ring{animation:ripple .85s cubic-bezier(.16,.75,.3,1) 1.0s both;}
+  .play .ring.r2{animation-delay:1.11s;}
+  @keyframes ripple{
+    0%  {opacity:.75; transform:scale(1);}
+    100%{opacity:0;   transform:scale(3);}
+  }
+
+  .play .sparks i{animation:spark .55s cubic-bezier(.2,.75,.3,1) 1.0s both;}
+  @keyframes spark{
+    0%  {opacity:1; transform:rotate(var(--a)) translateX(4px) scale(1);}
+    100%{opacity:0; transform:rotate(var(--a)) translateX(50px) scale(0);}
+  }
+
+  .play .grid{animation:thud .42s ease-out 1.0s both;}
+  @keyframes thud{
+    0%{transform:translateY(0)} 22%{transform:translateY(2.5px)}
+    55%{transform:translateY(-1px)} 100%{transform:translateY(0)}
+  }
+
+  .cal-foot{
+    margin-top:22px; padding-top:18px;
+    border-top:1px solid var(--line);
+    text-align:center; font-size:14px; color:var(--muted);
+  }
+  .cal-foot b{color:var(--vermil); font-weight:800;}
+
+  /* ── 안내사항 ───────────────────────────── */
+  .notes{padding:26px;}
+  .note{display:flex; gap:13px; align-items:flex-start;}
+  .note + .note{margin-top:18px; padding-top:18px; border-top:1px solid var(--line);}
+  .dot{
+    flex:0 0 auto; width:6px; height:6px; margin-top:11px;
+    border-radius:50%; background:var(--gold);
+    box-shadow:0 0 12px rgba(227,188,128,.6);
+  }
+  .note-body{flex:1;}
+  .note-body p{margin:0; font-size:15px; color:#E7DED2;}
+  .note-body small{display:block; margin-top:5px; font-size:13px; color:var(--muted);}
+
+  footer{
+    margin-top:30px; padding-top:24px;
+    border-top:1px solid var(--line);
+    text-align:center; font-size:14px; color:var(--muted);
+  }
+  footer b{color:var(--cream); font-weight:700;}
+  footer span{color:var(--muted); font-size:13px;}
+
+  /* ── 모바일 ─────────────────────────────── */
+  @media (max-width:520px){
+    .hero{padding:64px 18px 92px;}
+    .moon{width:88px; height:88px; right:7%; top:13%;}
+    .wrap{padding:0 14px 56px;}
+    .card{padding:24px 16px; border-radius:18px;}
+    .grid{gap:4px;}
+    .d{padding:11px 0 10px; border-radius:11px;}
+    .dl-label{padding-right:0; border-right:0; padding-bottom:10px;
+              border-bottom:1px solid rgba(227,188,128,.24); width:100%;}
+    .stampwrap{width:44px; height:44px; margin-top:5px;}
+    .stamp{font-size:10px; letter-spacing:0; box-shadow:inset 0 0 0 2px rgba(255,255,255,.26), 0 8px 18px rgba(226,69,46,.4);}
+    .d.today{padding-bottom:12px;}
+  }
+
+  /* ── 모션 최소화 ─────────────────────────── */
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html.js .stamp{opacity:1;}
+    html.js .today .num{opacity:1; color:var(--vermil);}
+    .d.today{background:linear-gradient(160deg,rgba(226,69,46,.17),rgba(226,69,46,.05));
+             border-color:rgba(255,90,69,.5);}
+    .ring{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="stars"></div>
+  <div class="moon"></div>
+  <span class="eyebrow reveal">HR NOTICE</span>
+  <h1 class="reveal d1">9월 단체연차 시행 안내</h1>
+  <p class="reveal d2">추석 연휴와 연계하여 <b>9월 24일부터 28일까지</b> 5일간 이어집니다.</p>
+</header>
+
+<main class="wrap">
+
+  <section class="card reveal d2">
+    <p class="lede">9/28(월)에는 추석 연휴와 연계한 <b>단체연차</b>가 시행됩니다. 임직원 여러분께서는 풍요로운 한가위와 더불어 단체연차를 통해 여유로운 휴식을 취하시기 바랍니다.</p>
+  </section>
+
+  <section class="card dateline reveal d3">
+    <div class="dl-label">단체연차 시행일</div>
+    <div class="dl-body">
+      <div class="dl-main">9월 28일<em>월요일</em></div>
+      <div class="dl-sub">※ 추석 연휴 연계</div>
+    </div>
+  </section>
+
+  <section class="card reveal d4" id="cal">
+    <div class="cal-head">
+      <div class="cal-title">2026년 9월 추석 연휴 주간</div>
+      <button class="replay" type="button">다시 보기</button>
+    </div>
+
+    <div class="grid">
+      <div class="dow s">일</div><div class="dow">월</div><div class="dow">화</div>
+      <div class="dow">수</div><div class="dow">목</div><div class="dow">금</div><div class="dow t">토</div>
+
+      <div class="d off">20</div>
+      <div class="d">21</div>
+      <div class="d">22</div>
+      <div class="d">23</div>
+      <div class="d hol">24</div>
+      <div class="d hol">25</div>
+      <div class="d hol">26</div>
+
+      <div class="band">추석 연휴</div>
+
+      <div class="d off">27</div>
+
+      <div class="d today">
+        <span class="num">28</span>
+        <span class="stampwrap">
+          <span class="ring"></span>
+          <span class="ring r2"></span>
+          <span class="stamp">단체<br>연차</span>
+          <span class="sparks">
+            <i style="--a:0deg"></i><i style="--a:45deg"></i><i style="--a:90deg"></i><i style="--a:135deg"></i>
+            <i style="--a:180deg"></i><i style="--a:225deg"></i><i style="--a:270deg"></i><i style="--a:315deg"></i>
+          </span>
+        </span>
+      </div>
+
+      <div class="d">29</div>
+      <div class="d">30</div>
+      <div class="d next">1</div>
+      <div class="d next">2</div>
+      <div class="d next">3</div>
+    </div>
+
+    <div class="cal-foot">9월 24일(목) ~ 9월 28일(월) · <b>5일간 연휴</b></div>
+  </section>
+
+  <section class="card notes reveal d5">
+    <div class="note">
+      <span class="dot"></span>
+      <div class="note-body">
+        <p>단체연차일 및 추석 연휴 기간 근무 시 대체일 지정 후 근무시간 담당자 전달</p>
+        <small>→ 담당자 HRM 등록</small>
+      </div>
+    </div>
+    <div class="note">
+      <span class="dot"></span>
+      <div class="note-body">
+        <p>해외현장 : 추석 연휴기간 중 의무휴무일 지정 권장</p>
+        <small>※ 의무휴무일 : 국내·현지 공휴일 中 현장별 최소 8일 휴무</small>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    문의 : <b>인재성장팀 조성철 책임</b><span>(☎2948)</span> &nbsp;|&nbsp; <b>안제형 매니저</b><span>(☎6161)</span>
+  </footer>
+
+</main>
+
+<script>
+  var cal = document.getElementById('cal');
+
+  function play(){
+    cal.classList.remove('play');
+    void cal.offsetWidth;   // reflow — 애니메이션 재시작
+    cal.classList.add('play');
+  }
+
+  // 달력이 화면에 들어올 때 한 번 재생
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ play(); io.disconnect(); }
+      });
+    }, {threshold:.45});
+    io.observe(cal);
+  } else {
+    play();
+  }
+
+  document.querySelector('.replay').addEventListener('click', play);
+</script>
+
+</body>
+</html>

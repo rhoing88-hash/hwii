@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제1회 HR AI 헤비토커 대회</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ink:#0b1030; --sub:#1c2250; --mute:#363e72; --line:#e6e9f5;
+  --blue:#2f6bff; --violet:#7a5cff; --cyan:#12b5ee; --tint:#f5f7ff;
+  --grad:linear-gradient(100deg,var(--blue),var(--violet));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard',system-ui,sans-serif;background:#e9edf8;color:var(--ink);line-height:1.55;
+  -webkit-font-smoothing:antialiased;word-break:keep-all}
+.sheet{max-width:760px;margin:0 auto;background:#fff;box-shadow:0 30px 80px rgba(40,60,140,.16);overflow:hidden}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ───── HERO ───── */
+.hero{position:relative;padding:60px 48px 64px;overflow:hidden;
+  background:
+   radial-gradient(520px 320px at 100% 0%,rgba(122,92,255,.20),transparent 70%),
+   radial-gradient(480px 320px at 0% 100%,rgba(18,181,238,.18),transparent 70%),
+   #f8f9ff}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(47,107,255,.22) 1px,transparent 1.4px);background-size:22px 22px;
+  mask-image:linear-gradient(115deg,transparent 35%,#000 100%);-webkit-mask-image:linear-gradient(115deg,transparent 35%,#000 100%)}
+.hero>*{position:relative}
+/* embed용: 히어로를 embed 높이에 맞춤 */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.hero h1,.hero .prompt{width:100%}
+html{scrollbar-width:thin}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:800 12px/1 'Pretendard','Malgun Gothic',sans-serif;letter-spacing:.24em;color:var(--blue)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(47,107,255,.15);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(47,107,255,0)}}
+.hero h1{margin-top:26px;font-weight:900;letter-spacing:-.04em;line-height:1.08}
+.hero h1 .l1{display:block;font-size:clamp(30px,6.6vw,48px)}
+.hero h1 .l2{display:block;font-size:clamp(54px,12.5vw,92px);color:var(--ink);margin-top:4px}
+.prompt{margin-top:42px;display:flex;align-items:center;gap:14px;max-width:520px;padding:10px 10px 10px 22px;border-radius:99px;background:#fff;
+  box-shadow:0 14px 40px rgba(47,80,220,.18),0 0 0 1.5px transparent;position:relative}
+.prompt::before{content:"";position:absolute;inset:0;border-radius:99px;padding:1.5px;background:linear-gradient(100deg,var(--cyan),var(--violet),#ff6bd0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.prompt svg.sp{flex:none;width:22px;height:22px}
+.prompt .q{flex:1;font-weight:800;font-size:clamp(16px,4vw,21px);letter-spacing:-.02em;white-space:nowrap}
+.prompt .q::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:5px;vertical-align:-.15em;background:var(--violet);animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.prompt .go{flex:none;width:42px;height:42px;border-radius:50%;background:var(--grad);display:grid;place-items:center;box-shadow:0 8px 18px rgba(80,90,255,.4)}
+.prompt .go svg{width:18px;height:18px}
+
+/* ───── SECTIONS ───── */
+.sec{padding:60px 48px;border-top:1px solid var(--line)}
+.shead{display:flex;align-items:flex-end;gap:18px;margin-bottom:28px}
+.num{font-weight:900;font-size:76px;line-height:.82;letter-spacing:-.05em}
+.shead .t{padding-bottom:4px}
+.stp{display:block;font:800 12px/1 'Pretendard','Malgun Gothic',sans-serif;letter-spacing:.24em;color:var(--blue);margin-bottom:10px}
+.shead h2{font-size:clamp(26px,5.6vw,36px);font-weight:900;letter-spacing:-.035em;line-height:1.15}
+.lead{color:var(--sub);font-size:clamp(14.5px,3.4vw,16.5px);margin-bottom:26px;max-width:600px}
+
+/* step 01 */
+.items{display:flex;flex-direction:column;gap:12px}
+.item{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border-radius:18px;background:var(--tint);border:1px solid var(--line)}
+.item .n{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#fff;font-weight:800;font-size:15px}
+.item p{font-weight:700;font-size:clamp(14.5px,3.5vw,16.5px);color:var(--ink);padding-top:4px;line-height:1.6}
+.item p em{display:block;margin-top:8px;font-style:normal;font-weight:500;font-size:13px;color:var(--mute)}
+
+/* step 02 */
+.chip{display:inline-flex;align-items:center;gap:12px;padding:15px 26px;border-radius:99px;background:var(--tint);border:1.5px solid rgba(122,92,255,.45);font-weight:800;font-size:clamp(16px,4.2vw,20px);letter-spacing:-.02em;color:var(--ink);margin-bottom:26px;box-shadow:0 8px 22px rgba(80,90,255,.12)}
+.chip svg{width:24px;height:24px;flex:none}
+.tlbox{border:1px solid var(--line);border-radius:20px;padding:12px 26px 22px}
+.tlttl{display:inline-block;margin:16px 0 8px;padding:10px 22px;border-radius:12px;background:var(--grad);color:#fff;font:900 clamp(17px,4.4vw,21px)/1 'Pretendard','Malgun Gothic',sans-serif;letter-spacing:.06em;box-shadow:0 8px 20px rgba(80,90,255,.32)}
+.tl{list-style:none}
+.tl li{position:relative;display:grid;grid-template-columns:150px 32px 1fr;align-items:center;padding:15px 0}
+.tl li::before{content:"";position:absolute;left:166px;top:0;bottom:0;width:2px;transform:translateX(-1px);background:linear-gradient(var(--cyan),var(--violet))}
+.tl li:first-child::before{top:50%}.tl li:last-child::before{bottom:50%}
+.tl .d{text-align:left;padding-right:10px;font-weight:900;font-size:17px;color:var(--blue);line-height:1.3;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tl .n{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;background:#fff;border:3.5px solid var(--violet);justify-self:center;box-shadow:0 0 0 5px rgba(122,92,255,.13)}
+.tl .tt{padding-left:14px;font-weight:900;font-size:17px;letter-spacing:-.03em;line-height:1.3;color:var(--ink)}
+.tl .tt small{display:block;margin-top:4px;padding:0;border:0;background:none;font-weight:600;font-size:14.5px;color:var(--sub);letter-spacing:-.01em;line-height:1.4}
+.red{margin-top:16px;text-align:center;color:#e5405c;font-weight:700;font-size:13.5px}
+
+/* step 03 */
+.bul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;font-weight:700;font-size:clamp(14.5px,3.4vw,16.5px)}
+.bul li{display:flex;gap:10px}
+.bul li::before{content:"";flex:none;width:7px;height:7px;margin-top:.62em;border-radius:50%;background:var(--grad)}
+.crit{display:flex;flex-direction:column;gap:12px}
+.bul li.nb{margin-top:6px;color:var(--sub);font-weight:700}.bul li.nb::before{display:none}
+.cr{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:6px 22px;padding:20px 24px;border:1px solid var(--line);border-radius:18px}
+.cr .h span{display:block;font:800 11px/1 'Pretendard','Malgun Gothic',sans-serif;letter-spacing:.22em;color:var(--blue);margin-bottom:7px}
+.cr .h b{font-size:18px;font-weight:900;letter-spacing:-.02em}
+.cr .c{font-size:14.5px;color:var(--sub)}
+.cr .p{font-weight:900;font-size:34px;letter-spacing:-.04em;line-height:1}
+.cr .p small{font-size:15px;margin-left:2px;font-weight:800}
+.cr .bar{grid-column:1/-1;height:6px;border-radius:9px;background:var(--tint);overflow:hidden;margin-top:8px}
+.cr .bar i{display:block;height:100%;border-radius:9px;background:var(--grad)}
+.note{margin-top:20px;padding:16px 20px;border-left:3px solid var(--violet);background:var(--tint);border-radius:0 12px 12px 0;font-size:13.5px;font-weight:600;color:var(--sub)}
+
+/* closing */
+.end{position:relative;padding:70px 32px 74px;text-align:center;color:#fff;overflow:hidden;
+  background:radial-gradient(500px 260px at 15% 0%,rgba(18,181,238,.55),transparent 70%),radial-gradient(500px 280px at 90% 100%,rgba(255,107,208,.45),transparent 70%),linear-gradient(120deg,#2a56ff,#7a5cff)}
+.end::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.28) 1px,transparent 1.4px);background-size:22px 22px;opacity:.5}
+.end>*{position:relative}
+.end .a{font-size:clamp(22px,5vw,30px);font-weight:800;opacity:.92;letter-spacing:-.02em}
+.end .b{margin-top:6px;font-size:clamp(34px,8vw,54px);font-weight:900;letter-spacing:-.04em;line-height:1.15}
+.end .c{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:12px 24px;border-radius:99px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(6px);font-weight:700;font-size:15px}
+.end .c svg{width:20px;height:20px}
+
+/* ───── 인터랙션 ───── */
+.prompt{cursor:pointer;transition:transform .2s,box-shadow .2s;outline:none}
+.prompt:hover,.prompt:focus-visible{transform:translateY(-2px);box-shadow:0 18px 46px rgba(47,80,220,.28)}
+.prompt:active{transform:scale(.99)}
+.prompt .go{position:relative;transition:transform .2s}
+.prompt:hover .go{transform:scale(1.08)}
+.prompt:not(.done) .go::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--violet);animation:ring 1.6s ease-out infinite}
+@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+.hint{margin-top:18px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;color:var(--sub);animation:nudge 1.8s ease-in-out infinite}
+.hint svg{width:16px;height:16px}
+@keyframes nudge{50%{transform:translateX(6px)}}
+.prompt.busy .go svg{display:none}
+.prompt.busy .go::after{content:"";width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .7s linear infinite}
+.prompt.busy .go::before{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.prompt.done .go{opacity:.55}
+.hint.off{display:none}
+.content{display:none}
+.content.show{display:block}
+
+/* 스크롤 인터랙션 */
+html{scroll-behavior:smooth}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.item.rv:nth-child(odd){transform:translateX(-36px)}.item.rv:nth-child(even){transform:translateX(36px)}
+.item.rv.in{transform:none}
+.num.rv{transform:translateY(20px) scale(.7);transform-origin:left bottom}
+.num.rv.in{transform:none}
+.rv.in.settled{transition:transform .25s,box-shadow .25s,opacity .25s}
+.item.settled:hover,.cr.settled:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(60,80,220,.16)}
+.item.settled:hover .n{transform:scale(1.12)}.item .n{transition:transform .25s}
+.tl li::before{transform:translateX(-1px) scaleY(0);transform-origin:top;transition:transform .7s .1s ease}
+.tl li.on::before{transform:translateX(-1px) scaleY(1)}
+.tl .n{transition:all .45s}
+.tl .d,.tl .tt{transition:opacity .5s,transform .5s}
+.tl li:not(.on) .n{border-color:#d3d8ee;box-shadow:none;transform:scale(.7)}
+.tl li:not(.on) .d,.tl li:not(.on) .tt{opacity:.25;transform:translateX(-8px)}
+.tl li.on .n{background:var(--violet);animation:dotpop .7s}
+@keyframes dotpop{0%{box-shadow:0 0 0 0 rgba(122,92,255,.55)}100%{box-shadow:0 0 0 14px rgba(122,92,255,0)}}
+.cr .bar i{transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.rail{position:fixed;z-index:30;top:14px;left:50%;transform:translate(-50%,-90px);display:flex;align-items:center;gap:4px;padding:6px;border-radius:99px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(40,60,160,.22);border:1px solid var(--line);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.rail.show{transform:translate(-50%,0)}
+.rail a{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:99px;font:800 12px/1 'Pretendard','Malgun Gothic',sans-serif;letter-spacing:.12em;color:var(--mute);text-decoration:none;transition:all .35s}
+.rail a i{width:7px;height:7px;border-radius:50%;background:#cfd5ee;transition:all .35s}
+.rail a.past{color:var(--sub)}.rail a.past i{background:var(--violet)}
+.rail a.act{color:#fff;background:var(--grad);box-shadow:0 6px 16px rgba(80,90,255,.4)}.rail a.act i{background:#fff}
+.end .confetti{position:absolute;bottom:-10px;width:8px;height:12px;border-radius:2px;opacity:0;animation:conf 2.4s ease-out forwards}
+@keyframes conf{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--x),-300px) rotate(var(--r))}}
+
+/* 마무리 팡파레 */
+.end::before{animation:drift 24s linear infinite}
+@keyframes drift{to{background-position:220px 220px}}
+.end .a.in{display:inline-block;animation:beat 1.5s ease-in-out 1s infinite}
+@keyframes beat{0%,60%,100%{transform:scale(1)}15%{transform:scale(1.16)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
+.end .b.in{background:linear-gradient(100deg,#fff 35%,#ffe7a0 48%,#fff 61%) 0 0/260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 3.2s linear infinite,bob2 3.4s ease-in-out infinite}
+@keyframes shine{to{background-position:-160% 0}}
+@keyframes bob2{50%{transform:translateY(-7px)}}
+.end .c.in{animation:bob2 3s ease-in-out .4s infinite,glow 2.2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 10px rgba(255,255,255,.14),0 0 34px rgba(255,255,255,.45)}}
+.end .c svg{animation:wiggle 2.6s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes wiggle{0%,55%,100%{transform:rotate(0)}65%{transform:rotate(-16deg)}75%{transform:rotate(14deg)}85%{transform:rotate(-8deg)}}
+.end .confetti{position:absolute;bottom:-10px;opacity:0;pointer-events:none}
+.end .confetti.pop{bottom:8px;animation:pop 2.6s both}
+@keyframes pop{
+  0%{opacity:1;transform:translate(0,0) rotate(0);animation-timing-function:cubic-bezier(.1,.8,.3,1)}
+  38%{opacity:1;transform:translate(var(--x),var(--y)) rotate(calc(var(--r)*.5));animation-timing-function:cubic-bezier(.5,0,.9,.6)}
+  100%{opacity:0;transform:translate(calc(var(--x)*1.2),calc(var(--y) + 340px)) rotate(var(--r))}}
+.end .confetti.fall{bottom:auto;top:-16px;animation:fall linear forwards}
+@keyframes fall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate(var(--x),380px) rotate(var(--r))}}
+.end .ring{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:3px solid rgba(255,255,255,.9);pointer-events:none;animation:rg 1.2s ease-out forwards}
+@keyframes rg{to{transform:scale(16);opacity:0}}
+.end .star{position:absolute;pointer-events:none;color:#fff;animation:tw2 2s ease-in-out infinite}
+@keyframes tw2{0%,100%{opacity:.15;transform:scale(.5) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(25deg)}}
+
+@media(max-width:640px){
+  .hero{padding:44px 24px 48px}.sec{padding:44px 24px}
+  .num{font-size:56px}.shead{gap:14px}
+  .prompt{padding-left:16px;gap:10px}
+  .item{padding:18px 16px;gap:14px}
+  .tlbox{padding:8px 16px 18px}
+  .tl li{grid-template-columns:96px 26px 1fr}.tl li::before{left:109px}
+  .tl .d{font-size:15px;padding-right:4px}.tl .tt{font-size:15px;padding-left:10px}.tl .tt small{font-size:13.5px}
+  .cr{grid-template-columns:1fr auto;padding:18px 18px}.cr .c{grid-column:1/-1;order:3}.cr .bar{order:4}
+  .cr .p{font-size:28px}
+}
+</style>
+</head>
+<body>
+<article class="sheet">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="eyebrow"><i></i>HR AI EVENT</div>
+  <h1><span class="l1 gt">제1회 HR AI 헤비토커</span><span class="l2">대회 실시</span></h1>
+  <div class="prompt" id="prompt" role="button" tabindex="0" aria-label="엔터를 눌러 내용 보기">
+    <svg class="sp" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 6.3L21 10.5l-6.8 2.2L12 19l-2.2-6.3L3 10.5l6.8-2.2L12 2z" fill="url(#g1)"/><path d="M19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9L19 15z" fill="#7a5cff"/><defs><linearGradient id="g1" x1="3" y1="2" x2="21" y2="19"><stop stop-color="#12b5ee"/><stop offset="1" stop-color="#7a5cff"/></linearGradient></defs></svg>
+    <span class="q">AI와 어디까지 말해봤니?</span>
+    <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </div>
+  <div class="hint" id="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>엔터를 눌러 내용을 확인해보세요</div>
+</header>
+
+<div class="content" id="content">
+
+<!-- STEP 01 -->
+<section class="sec" id="s1">
+  <div class="shead"><span class="num gt">01</span><div class="t"><span class="stp">STEP 01</span><h2>주제 선정 가이드</h2></div></div>
+  <p class="lead">AI를 활용하여 실제 업무의 문제를 해결하고, 업무 효율과 품질 향상에 기여할 수 있는 결과물을 제출해 주시기 바랍니다.</p>
+  <div class="items">
+    <div class="item"><span class="n">1</span><p>단순 아이디어 제시 지양</p></div>
+    <div class="item"><span class="n">2</span><p>기존 대비 AI 도입 후 업무 소요기간/품질/완성도를 비교하여 시간/비용을 절감하고 생산성 또는 품질 개선 효과 존재</p></div>
+    <div class="item"><span class="n">3</span><p>결과물의 완성도를 높이기 위한 후속 해결과제, 문제점을 도출할 수 있는 인사이트 존재<em>※ 해결과제/문제점 예시 : 엑셀 원본 데이터 전처리 필요, 유관부서 협의, 기존 업무 프로세스 개선 등</em></p></div>
+  </div>
+</section>
+
+<!-- STEP 02 -->
+<section class="sec" id="s2">
+  <div class="shead"><span class="num gt">02</span><div class="t"><span class="stp">STEP 02</span><h2>운영 프로세스</h2></div></div>
+  <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#7a5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>수신처: 인재성장팀 수윰칸 매니저</div>
+  <div class="tlbox">
+    <div class="tlttl">전체 일정</div>
+    <ul class="tl">
+      <li><span class="d">10/8(목)</span><span class="n"></span><span class="tt">과제 계획서 제출<small>각 팀별 2개 과제 계획서</small></span></li>
+      <li><span class="d">10/23(금)</span><span class="n"></span><span class="tt">1차 결과물 제출<small>각 팀별 2개 과제</small></span></li>
+      <li><span class="d">10/23(금)~<br>10/26(월)</span><span class="n"></span><span class="tt">팀 내 최종 제출과제 1개 선정<small>팀 내 자율 토론 후 결정</small></span></li>
+      <li><span class="d">10/27(화)</span><span class="n"></span><span class="tt">와일드카드 결정전<small>각 팀별 미제출 과제 중 1개 선정</small></span></li>
+      <li><span class="d">10/30(금)</span><span class="n"></span><span class="tt">AI 헤비토커 발표회<small>총 5개 과제 발표 예정</small></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- STEP 03 -->
+<section class="sec" id="s3">
+  <div class="shead"><span class="num gt">03</span><div class="t"><span class="stp">STEP 03</span><h2>우수작 선정 및 심사 기준</h2></div></div>
+  <ul class="bul">
+    <li>[예선] 팀 내 자율 토론 후 결선 제출 과제 선정</li>
+    <li>[결선] 온라인 실시간 평가 진행 후 우수작 선정</li>
+    <li class="nb">※ 결선 심사기준 (총 100점)</li>
+  </ul>
+  <div class="crit">
+    <div class="cr"><div class="h"><b>과제심사</b></div><div class="c">실효성, 확산 가능성(파급력), 창의성, 완성도 각 15점 씩</div><div class="p gt"><span class="cnt" data-to="60">60</span><small>점</small></div><div class="bar"><i style="width:60%"></i></div></div>
+    <div class="cr"><div class="h"><b>발표심사</b></div><div class="c">주제 연관성, 내용 구성, 발표 완성도</div><div class="p gt"><span class="cnt" data-to="20">20</span><small>점</small></div><div class="bar"><i style="width:20%"></i></div></div>
+    <div class="cr"><div class="h"><b>AI 사전심사</b></div><div class="c">효율적인 프롬프트 작성, 완성도 높은 결과물</div><div class="p gt"><span class="cnt" data-to="20">20</span><small>점</small></div><div class="bar"><i style="width:20%"></i></div></div>
+  </div>
+  <p class="note">※ 현장에서 정확한 심사 진행을 위해 발표회 2일 전 인사실 직원에게 과제 결과물 공유 및 사전 테스트 사용 안내 예정</p>
+</section>
+
+<!-- CLOSING -->
+<footer class="end">
+  <div class="a">두근두근!</div>
+  <div class="b">선물이 기다립니다!</div>
+  <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-2 0-4-1-4-2.5S9.5 3 12 8zM12 8c2 0 4-1 4-2.5S14.5 3 12 8z"/></svg>추후 공지 예정</div>
+</footer>
+</div>
+
+</article>
+<nav class="rail" id="rail"><a href="#s1"><i></i>01</a><a href="#s2"><i></i>02</a><a href="#s3"><i></i>03</a></nav>
+<script>
+(function(){
+  var c=document.getElementById('content'),rail=document.getElementById('rail');
+  var els=[].slice.call(c.querySelectorAll('.shead .num,.shead .t,.lead,.item,.chip,.tlbox,.bul li,.cr,.note,.end>*'));
+  var bars=[].slice.call(c.querySelectorAll('.cr .bar i'));
+  bars.forEach(function(b){b.dataset.w=b.style.width;b.style.width='0';});
+  [].slice.call(c.querySelectorAll('.cnt')).forEach(function(n){n.textContent='0';});
+  els.forEach(function(el){
+    el.classList.add('rv');
+    var idx=[].indexOf.call(el.parentNode.children,el);
+    el.style.transitionDelay=Math.min(idx*0.09,0.45)+'s';
+  });
+  function count(n){
+    var to=+n.dataset.to,t0=performance.now(),d=1100;
+    (function f(t){var k=Math.min((t-t0)/d,1);n.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);})(t0);
+  }
+  function timeline(box){
+    [].slice.call(box.querySelectorAll('.tl li')).forEach(function(li,i){setTimeout(function(){li.classList.add('on');},500+i*480);});
+  }
+  function confetti(end){
+    var cols=['#12b5ee','#fff','#ffd36b','#ff6bd0','#b6a4ff'];
+    for(var i=0;i<34;i++){
+      var s=document.createElement('span');s.className='confetti';
+      s.style.left=(5+Math.random()*90)+'%';
+      s.style.background=cols[i%cols.length];
+      s.style.setProperty('--x',(Math.random()*160-80)+'px');
+      s.style.setProperty('--r',(Math.random()*720-360)+'deg');
+      s.style.animationDelay=(Math.random()*.6)+'s';
+      end.appendChild(s);
+    }
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var el=e.target;io.unobserve(el);el.classList.add('in');
+    setTimeout(function(){el.style.transitionDelay='';el.classList.add('settled');},1300);
+    if(el.classList.contains('tlbox'))timeline(el);
+    if(el.classList.contains('cr')){
+      var cn=el.querySelector('.cnt'),b=el.querySelector('.bar i');
+      setTimeout(function(){count(cn);b.style.width=b.dataset.w;},350);
+    }
+    if(false)confetti(el.parentNode);
+  });},{threshold:.25,rootMargin:'0px 0px -6% 0px'});
+  document.addEventListener('contentopen',function(){
+    els.forEach(function(el){io.observe(el);});
+    setTimeout(function(){rail.classList.add('show');},900);
+  });
+  var secs=['s1','s2','s3'].map(function(id){return document.getElementById(id);}),links=[].slice.call(rail.querySelectorAll('a')),tick=false;
+  function upd(){
+    tick=false;var a=-1;
+    secs.forEach(function(s,i){if(s.getBoundingClientRect().top<window.innerHeight*.45)a=i;});
+    links.forEach(function(l,i){l.classList.toggle('act',i===a);l.classList.toggle('past',i<a);});
+  }
+  links.forEach(function(l,i){l.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:secs[i].getBoundingClientRect().top+window.pageYOffset-70,behavior:'smooth'});});});
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});
+
+  /* 마무리 팡파레 + 연속 모션 */
+  var end=c.querySelector('.end'),cols=['#12b5ee','#ffffff','#ffd36b','#ff6bd0','#b6a4ff','#7dffb2'],live=false,fired=false;
+  function piece(cls){
+    var s=document.createElement('span'),k=Math.random(),w=6+Math.random()*6;
+    s.className='confetti '+cls;
+    s.style.width=w+'px';s.style.height=(k<.4?w:w*2.1)+'px';
+    s.style.borderRadius=k<.25?'50%':'2px';
+    s.style.background=cols[Math.floor(Math.random()*cols.length)];
+    s.style.setProperty('--r',(Math.random()*900-450)+'deg');
+    s.addEventListener('animationend',function(){s.remove();});
+    return s;
+  }
+  function fanfare(){
+    [0,1].forEach(function(r){
+      var rg=document.createElement('span');rg.className='ring';rg.style.animationDelay=(r*.25)+'s';
+      rg.addEventListener('animationend',function(){rg.remove();});end.appendChild(rg);
+    });
+    [0,1].forEach(function(side){
+      for(var i=0;i<46;i++){
+        var s=piece('pop'),sp=140+Math.random()*300,ang=(35+Math.random()*45)*Math.PI/180;
+        s.style.left=side?'97%':'3%';
+        s.style.setProperty('--x',((side?-1:1)*Math.cos(ang)*sp*1.1)+'px');
+        s.style.setProperty('--y',(-Math.sin(ang)*sp*1.05-60)+'px');
+        s.style.animationDelay=(Math.random()*.35)+'s';
+        end.appendChild(s);
+      }
+    });
+  }
+  (function(){
+    for(var i=0;i<16;i++){
+      var st=document.createElement('span');st.className='star';st.textContent='✦';
+      st.style.left=(4+Math.random()*92)+'%';st.style.top=(6+Math.random()*84)+'%';
+      st.style.fontSize=(10+Math.random()*16)+'px';
+      st.style.animationDelay=(Math.random()*2)+'s';st.style.animationDuration=(1.4+Math.random()*1.6)+'s';
+      end.appendChild(st);
+    }
+  })();
+  setInterval(function(){
+    if(!live)return;
+    for(var i=0;i<2;i++){
+      var s=piece('fall');
+      s.style.left=(Math.random()*100)+'%';
+      s.style.setProperty('--x',(Math.random()*120-60)+'px');
+      s.style.animationDuration=(3.2+Math.random()*2.6)+'s';
+      end.appendChild(s);
+    }
+  },420);
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    live=e.isIntersecting&&e.intersectionRatio>0.15;
+    if(live&&!fired&&e.intersectionRatio>.4){fired=true;setTimeout(fanfare,350);}
+  });},{threshold:[0,.15,.4,.7]}).observe(end);
+  end.addEventListener('click',fanfare);
+})();
+</script>
+<script>
+(function(){
+  var p=document.getElementById('prompt'),c=document.getElementById('content'),h=document.getElementById('hint'),busy=false;
+  function open(){
+    if(busy||p.classList.contains('done'))return;
+    busy=true;p.classList.add('busy');h.classList.add('off');
+    setTimeout(function(){
+      p.classList.remove('busy');p.classList.add('done');
+      c.classList.add('show');document.dispatchEvent(new Event('contentopen'));
+      setTimeout(function(){window.scrollTo({top:c.getBoundingClientRect().top+window.pageYOffset,behavior:'smooth'})},120);
+    },800);
+  }
+  p.addEventListener('click',open);
+  p.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  document.addEventListener('keydown',function(e){if(e.key==='Enter')open();});
+})();
+</script>
+</body>
+</html>
